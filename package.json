@@ -1,0 +1,24 @@
+{
+  "name": "ptdic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon --exec 'mocha'",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fxjs2": "^0.2.6",
+    "partial-js": "^1.1.8",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "expect": "^24.5.0",
+    "jest": "^24.5.0",
+    "mocha": "^6.0.2"
+  }
+}

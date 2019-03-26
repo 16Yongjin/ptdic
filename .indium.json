@@ -1,0 +1,12 @@
+{
+		"configurations": [
+				{  "name": "ptdic",
+						"type": "node",
+					 "root": "src",
+					 "command": "node"
+						    
+				}
+				  
+		]
+		
+}
