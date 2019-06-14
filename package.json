@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nodemon --exec 'mocha'",
-    "start": "PORT=7000 node search.js",
+    "start": "PORT=7000 node server.js",
     "dev": "nodemon index.js"
   },
   "author": "",
