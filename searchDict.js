@@ -38,7 +38,6 @@ const toNormalForm = str => str.replace(/[àáâãçéêíóôõúü]/gi, c => t
 const extractEntryIds = query =>
   _.pipe(
     _.sel(`searchResultMap->searchResultListMap->WORD->items`),
-
     _.filter(
       ({ handleEntry, sourceDictnameKO }) =>
         toNormalForm(handleEntry) === toNormalForm(query) &&
@@ -137,13 +136,14 @@ const searchDict = query =>
       .elseIf(_.c(getVerbRoots(query)))(searchWords)
   )
 
-searchDict('maca').then(_.hi)
-searchDict('bom').then(_.hi)
-searchDict('passava').then(_.hi)
-searchDict('passaria').then(_.hi)
-searchDict('rapido').then(_.hi)
-searchDict('alemães').then(_.hi)
-searchDict('alegres')
-  .then(JSON.stringify)
-  .then(_.hi)
+// searchDict('maca').then(_.hi)
+// searchDict('bom').then(_.hi)
+// searchDict('passava').then(_.hi)
+// searchDict('passaria').then(_.hi)
+// searchDict('rapido').then(_.hi)
+// searchDict('alemães').then(_.hi)
+// searchDict('alegres')
+//   .then(JSON.stringify)
+//   .then(_.hi)
+
 module.exports = searchDict
