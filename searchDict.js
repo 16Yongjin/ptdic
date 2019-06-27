@@ -9,7 +9,7 @@ const fetchJson = uri => getAsync({ uri, json: true }).then(_.sel('body'))
 const decentDictTypes = [
   '한국외국어대학교 지식출판원 한국어 포르투갈어 사전',
   '성안당 한포사전',
-  '성안당 포한사전',
+  '성안당 포한사전'
 ]
 
 const splitString = mark => str => str.split(mark)
@@ -30,7 +30,7 @@ const toAscii = {
   ô: 'o',
   õ: 'o',
   ú: 'u',
-  ü: 'u',
+  ü: 'u'
 }
 
 const toNormalForm = str => str.replace(/[àáâãçéêíóôõúü]/gi, c => toAscii[c])
@@ -67,18 +67,20 @@ const getPron = _.pipe(
 
 const getEntryName = _.sel('entry->members->0->entry_name')
 
+const normalizeMean = mean => mean.replace(/<LABLE>(.+)<\/LABLE>/i, '[$1]')
+
 const getMeans = _.pipe(
   _.sel('entry->means'),
   _.map(mean => ({
     mean: mean.origin_mean,
-    part: mean.part.part_ko_name,
+    part: normalizeMean(mean.part.part_ko_name)
   }))
 )
 
 const getDictFromEntry = entry => ({
   entry: getEntryName(entry),
   pron: getPron(entry),
-  means: getMeans(entry),
+  means: getMeans(entry)
 })
 
 const searchDictByEntry = _.pipe(
