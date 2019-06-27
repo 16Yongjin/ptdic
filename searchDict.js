@@ -67,13 +67,13 @@ const getPron = _.pipe(
 
 const getEntryName = _.sel('entry->members->0->entry_name')
 
-const normalizeMean = mean => mean.replace(/<LABLE>(.+)<\/LABLE>/i, '[$1]')
+const normalizeMean = mean => mean.replace(/<LABEL>(.+)<\/LABEL>/i, '[$1]')
 
 const getMeans = _.pipe(
   _.sel('entry->means'),
   _.map(mean => ({
-    mean: mean.origin_mean,
-    part: normalizeMean(mean.part.part_ko_name)
+    mean: normalizeMean(mean.origin_mean),
+    part: mean.part.part_ko_name
   }))
 )
 
@@ -144,6 +144,9 @@ const searchDict = query =>
 // searchDict('passaria').then(_.hi)
 // searchDict('rapido').then(_.hi)
 // searchDict('alemães').then(_.hi)
+searchDict('reduzir')
+  .then(JSON.stringify)
+  .then(_.hi)
 // searchDict('alegres')
 //   .then(JSON.stringify)
 //   .then(_.hi)
