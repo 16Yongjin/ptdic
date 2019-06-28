@@ -61,6 +61,7 @@ const searchEntryIds = query => _.go(query, searchEntry, extractEntryIds(query))
 
 const getPron = _.pipe(
   _.sel('entry->members->0->prons->0->korean_pron_symbol'),
+  v => v || '',
   splitString('||'),
   _.first
 )
@@ -79,7 +80,7 @@ const getMeans = _.pipe(
 
 const getDictFromEntry = entry => ({
   entry: getEntryName(entry),
-  pron: getPron(entry),
+  pron: getPron(entry) || '',
   means: getMeans(entry)
 })
 
