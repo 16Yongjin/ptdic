@@ -63,7 +63,8 @@ const getPron = _.pipe(
   _.sel('entry->members->0->prons->0->korean_pron_symbol'),
   v => v || '',
   splitString('||'),
-  _.first
+  _.first,
+  v => v && `[${v}]`
 )
 
 const getEntryName = _.sel('entry->members->0->entry_name')
@@ -145,9 +146,9 @@ const searchDict = query =>
 // searchDict('passaria').then(_.hi)
 // searchDict('rapido').then(_.hi)
 // searchDict('alemães').then(_.hi)
-searchDict('comissão')
-  .then(JSON.stringify)
-  .then(_.hi)
+// searchDict('comissão')
+//   .then(JSON.stringify)
+//   .then(_.hi)
 // searchDict('alegres')
 //   .then(JSON.stringify)
 //   .then(_.hi)
