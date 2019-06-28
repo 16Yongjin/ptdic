@@ -3,7 +3,7 @@ const { promisify } = require('util')
 const _ = require('partial-js')
 const mif = require('./mif')
 const verbRoots = require('./verbRoots.json')
-const { preprocess } = require('./preprocess')
+const { preprocess, postprocess } = require('./textProcess')
 const [getAsync, postAsync] = [get, post].map(promisify)
 const fetchJson = uri => getAsync({ uri, json: true }).then(_.sel('body'))
 const decentDictTypes = [
@@ -130,6 +130,9 @@ const rootsFromWiki = _.pipe(
 )
 const getVerbRoots = query => verbRoots[query]
 
+const needsToPostprocess = query =>
+  query != postprocess(query) ? postprocess(query) : false
+
 const searchDict = query =>
   _.go(
     query,
@@ -138,6 +141,8 @@ const searchDict = query =>
     mif(extractEntryIds(preprocess(query)))(searchDictsByEntry)
       .elseIf(rootsFromWiki)(searchWords)
       .elseIf(_.c(getVerbRoots(query)))(searchWords)
+      .elseIf(_.c(needsToPostprocess(query)))(searchWord)
+      .else(_.c([]))
   )
 
 // searchDict('maca').then(_.hi)
@@ -152,5 +157,5 @@ const searchDict = query =>
 // searchDict('alegres')
 //   .then(JSON.stringify)
 //   .then(_.hi)
-
+// searchWord(postprocess('elétrifdca')).then(_.hi)
 module.exports = searchDict

@@ -8,7 +8,7 @@ const firstMean = _.pipe(
 )
 
 const testWord = ([word, mean]) =>
-  it(`WORD: ${word}`, async () => {
+  xit(`WORD: ${word}`, async () => {
     const dict = await searchDict(word)
     expect(firstMean(dict)).toBe(mean)
   })
@@ -21,6 +21,5 @@ describe('Fetch PTDIC', () => {
     ['mesmo', '같은'],
     ['alegres', '기쁘게 하다']
   ]
-		searchDict('alegres').then(_.hi)
   _.map(testWord)(testCases)
 })
