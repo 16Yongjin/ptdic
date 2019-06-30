@@ -5,7 +5,6 @@ const preprocess = query => {
     .replace(/([aeiou])is$/, '$1l')
     .replace(/éis$/, 'el')
     .replace(/ns$/, 'm')
-  //				.replace(/([rsz])es$/, '$1')
 }
 
 const postprocess = query => {

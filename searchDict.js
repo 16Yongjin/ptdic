@@ -133,17 +133,19 @@ const getVerbRoots = query => verbRoots[query]
 const needsToPostprocess = query =>
   query != postprocess(query) ? postprocess(query) : false
 
-const searchDict = query =>
-  _.go(
-    query,
-    preprocess,
-    searchEntry,
-    mif(extractEntryIds(preprocess(query)))(searchDictsByEntry)
-      .elseIf(rootsFromWiki)(searchWords)
-      .elseIf(_.c(getVerbRoots(query)))(searchWords)
-      .elseIf(_.c(needsToPostprocess(query)))(searchWord)
-      .else(_.c([]))
-  )
+const searchDict = _.pipe(
+  preprocess,
+  query =>
+    _.go(
+      query,
+      searchEntry,
+      mif(extractEntryIds(query))(searchDictsByEntry)
+        .elseIf(rootsFromWiki)(searchWords)
+        .elseIf(_.c(getVerbRoots(query)))(searchWords)
+        .elseIf(_.c(needsToPostprocess(query)))(searchWord)
+        .else(_.c([]))
+    )
+)
 
 // searchDict('maca').then(_.hi)
 // searchDict('bom').then(_.hi)

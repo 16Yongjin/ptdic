@@ -13,6 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mz": "^2.7.0",
     "partial-js": "^1.1.8",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
